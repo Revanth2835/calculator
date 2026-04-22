@@ -285,13 +285,4 @@ function flashButton(id) {
   setTimeout(() => btn.classList.remove('key-active'), 120);
 }
 
-// Add key-active style dynamically so no extra CSS is needed in HTML
-const style = document.createElement('style');
-style.textContent = `
-  .key-active {
-    transform: scale(0.94) !important;
-    filter: brightness(1.3);
-    transition: transform 0.08s ease, filter 0.08s ease;
-  }
-`;
-document.head.appendChild(style);
+// .key-active styles are defined in style.css

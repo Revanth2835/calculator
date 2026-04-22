@@ -1,28 +1,27 @@
 /* ============================================================
-   CALCULATOR – style.css
+   CALCULATOR – style.css (Normal Ordinary Theme)
    ============================================================ */
 
 /* ---------- CSS Custom Properties (design tokens) ---------- */
 :root {
-  --bg-page:        #0f0f13;
-  --bg-calc:        #1a1a24;
-  --bg-display:     #12121a;
-  --bg-btn-num:     #252535;
-  --bg-btn-op:      #2d2d45;
-  --bg-btn-clear:   #3a2a4a;
-  --bg-btn-eq:      linear-gradient(135deg, #7c3aed, #a855f7);
-  --text-primary:   #f0eeff;
-  --text-secondary: #9e8fc0;
-  --text-op:        #c084fc;
-  --text-clear:     #f472b6;
+  --bg-page:        #f5f5f7;
+  --bg-calc:        #ffffff;
+  --bg-display:     #f2f2f2;
+  --bg-btn-num:     #ffffff;
+  --bg-btn-op:      #f0f0f0;
+  --bg-btn-clear:   #f0f0f0;
+  --bg-btn-eq:      #007aff;
+  --text-primary:   #1d1d1f;
+  --text-secondary: #86868b;
+  --text-op:        #007aff;
+  --text-clear:     #ff3b30;
   --text-eq:        #ffffff;
-  --shadow-calc:    0 32px 80px rgba(124, 58, 237, 0.25),
-                    0 8px 24px rgba(0, 0, 0, 0.6);
-  --shadow-btn:     0 4px 12px rgba(0, 0, 0, 0.4);
-  --radius-calc:    28px;
-  --radius-btn:     16px;
-  --transition:     0.15s ease;
-  --font:           'Inter', sans-serif;
+  --shadow-calc:    0 8px 30px rgba(0,0,0,0.08);
+  --shadow-btn:     0 1px 3px rgba(0, 0, 0, 0.1);
+  --radius-calc:    12px;
+  --radius-btn:     8px;
+  --transition:     0.1s ease;
+  --font:           -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 /* ---------- Reset & Base ---------- */
@@ -41,10 +40,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* subtle animated mesh gradient */
-  background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(124, 58, 237, 0.15) 0%, transparent 55%),
-    radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.10) 0%, transparent 55%);
 }
 
 /* ---------- Wrapper ---------- */
@@ -58,119 +53,90 @@ body {
 
 /* ---------- Calculator Card ---------- */
 .calculator {
-  width: 340px;
+  width: 320px;
   background: var(--bg-calc);
   border-radius: var(--radius-calc);
   box-shadow: var(--shadow-calc);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  animation: slideUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 /* ---------- Display ---------- */
 .display {
   background: var(--bg-display);
-  padding: 24px 24px 18px;
+  padding: 24px;
   text-align: right;
-  min-height: 120px;
+  min-height: 110px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 4px;
 }
 
 .display__expression {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   min-height: 20px;
-  letter-spacing: 0.04em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: color var(--transition);
 }
 
 .display__result {
-  font-size: 2.8rem;
-  font-weight: 300;
+  font-size: 2.5rem;
+  font-weight: 400;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1;
+  line-height: 1.1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: font-size var(--transition);
 }
 
 /* Shrink font if number is long */
-.display__result.small  { font-size: 2rem; }
-.display__result.xsmall { font-size: 1.4rem; }
+.display__result.small  { font-size: 1.8rem; }
+.display__result.xsmall { font-size: 1.3rem; }
 
 /* Error state */
-.display__result.error { color: #f472b6; font-size: 1.6rem; }
+.display__result.error { color: var(--text-clear); font-size: 1.5rem; }
 
 /* ---------- Button Grid ---------- */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  padding: 20px;
+  gap: 10px;
+  padding: 15px;
 }
 
 /* ---------- Base Button ---------- */
 .btn {
-  position: relative;
-  height: 68px;
-  border: none;
+  height: 60px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: var(--radius-btn);
   cursor: pointer;
   font-family: var(--font);
-  font-size: 1.25rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 400;
   color: var(--text-primary);
   background: var(--bg-btn-num);
   box-shadow: var(--shadow-btn);
-  transition:
-    background var(--transition),
-    transform  var(--transition),
-    box-shadow var(--transition);
+  transition: background var(--transition), transform 0.05s ease;
   outline: none;
   user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Ripple pseudo-element (purely visual) */
-.btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: rgba(255,255,255,0.08);
-  opacity: 0;
-  transition: opacity var(--transition);
 }
 
 /* ---------- Button States ---------- */
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  background: #f8f8f8;
 }
-.btn:hover::after { opacity: 1; }
 
 .btn:active {
-  transform: translateY(0) scale(0.96);
-  box-shadow: var(--shadow-btn);
+  background: #e5e5ea;
+  transform: scale(0.98);
 }
-.btn:active::after { opacity: 0; }
 
 /* Keyboard focus ring */
 .btn:focus-visible {
-  outline: 2px solid #a855f7;
+  outline: 2px solid var(--bg-btn-eq);
   outline-offset: 2px;
 }
 
@@ -179,34 +145,30 @@ body {
 /* Numbers */
 .btn--number {
   background: var(--bg-btn-num);
-  color: var(--text-primary);
 }
-.btn--number:hover { background: #2f2f44; }
 
 /* Operators */
 .btn--operator {
   background: var(--bg-btn-op);
   color: var(--text-op);
 }
-.btn--operator:hover { background: #363655; }
+.btn--operator:hover { background: #e0e0e0; }
 
 /* Clear */
 .btn--clear {
   background: var(--bg-btn-clear);
   color: var(--text-clear);
 }
-.btn--clear:hover { background: #47305a; }
+.btn--clear:hover { background: #e0e0e0; }
 
 /* Equals */
 .btn--equals {
   background: var(--bg-btn-eq);
   color: var(--text-eq);
-  font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 .btn--equals:hover {
-  background: linear-gradient(135deg, #6d28d9, #9333ea);
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.55);
+  background: #0063cc;
 }
 
 /* Wide button spans 2 columns */
@@ -216,28 +178,19 @@ body {
 
 /* ---------- Keyboard Hint ---------- */
 .hint {
-  font-size: 0.72rem;
-  color: rgba(158, 143, 192, 0.5);
-  letter-spacing: 0.06em;
-  animation: fadeIn 1s 0.6s both;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  font-size: 0.75rem;
+  color: var(--text-secondary);
 }
 
 /* ---------- Active operator highlight ---------- */
 .btn--operator.active {
-  background: #7c3aed;
+  background: var(--bg-btn-eq);
   color: #fff;
-  box-shadow: 0 0 14px rgba(124, 58, 237, 0.6);
 }
 
-/* ---------- Responsive ---------- */
-@media (max-width: 380px) {
-  .calculator { width: 100%; border-radius: 20px; }
-  .buttons { gap: 9px; padding: 16px; }
-  .btn { height: 60px; font-size: 1.1rem; }
-  .display__result { font-size: 2.2rem; }
+/* ---------- Visual flash for keyboard press (from script.js) ---------- */
+.key-active {
+  background: #d1d1d6 !important;
+  transform: scale(0.96) !important;
 }
+
